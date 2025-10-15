@@ -3,14 +3,12 @@ package agent
 import (
 	"context"
 	"fmt"
+	"os"
 	"strings"
 
 	"github.com/openai/openai-go"
 	"github.com/openai/openai-go/option"
 )
-
-const OPENAI_API_KEY string = "dummy_api_key"
-const OPENAI_BASE_URL string = "http://localhost:11434/v1"
 
 type Agent struct {
 	Model string
@@ -39,8 +37,8 @@ func NewAgent(model string, tools ...Tool) *Agent {
 
 func (a *Agent) Think(ctx context.Context, prompt string) (string, error) {
 	client := openai.NewClient(
-		option.WithAPIKey(OPENAI_API_KEY),
-		option.WithBaseURL(OPENAI_BASE_URL),
+		option.WithAPIKey(os.Getenv("OPENAI_API_KEY")),
+		option.WithBaseURL(os.Getenv("OPENAI_BASE_URL")),
 	)
 
 	resp, err := client.Chat.Completions.New(ctx, openai.ChatCompletionNewParams{

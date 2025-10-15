@@ -10,7 +10,7 @@ import (
 )
 
 const OPENAI_API_KEY string = "dummy_api_key"
-const OPENAI_BASE_URL string = "http://localhost:11434/v1"
+const OPENAI_BASE_URL string = "http://localhost:11434"
 
 type Agent struct {
 	Model string
